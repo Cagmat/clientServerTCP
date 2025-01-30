@@ -39,7 +39,13 @@ public class Server {
     }
 
     public void chiudi() {
+        try{
+            if(serverSocket != null){
+                serverSocket.close();
+            }
+        } catch(IOException e){
 
+        }
     }
 
     public void termina() {
