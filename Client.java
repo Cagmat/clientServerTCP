@@ -6,24 +6,21 @@ import java.net.Socket;
 
 public class Client {
     private String nome;
-    private String colore = "rosso";
+    public  String colore = "\u001B[34m";
+    public static final String RESET = "\u001B[0m";
     private Socket socket;
     PrintWriter output;
     BufferedReader input;
 
-    public Client(String nomeDefault, String coloreDefault) {
+    public Client(String nomeDefault, String colore) {
         nome = nomeDefault;
-        colore = coloreDefault;
-    }
-
-    public Client(String nomeDefault) {
-        nome = nomeDefault;
+        this.colore = colore;
     }
 
     public void connetti(String nomeServer, int portaServer) {
         try {
             socket = new Socket(nomeServer, portaServer);
-            System.out.println(this.colore + "1) Connessione avvenuta");
+            System.out.println(colore + "1) Connessione avvenuta" + RESET);
             output = new PrintWriter(socket.getOutputStream(), true);
             input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         } catch (IOException e) {
@@ -32,7 +29,7 @@ public class Client {
     }
 
     public void scrivi(String messaggio) {
-        output.println(messaggio);
+        output.println(colore + messaggio + RESET);
     }
 
     public String leggi() {

@@ -21,28 +21,24 @@ public class Server {
             serverSocket = new ServerSocket(porta);
             System.out.println("Server in ascolto");
             System.out.println("Aspettando un client ...");
-            clientSocket = serverSocket.accept();
-            input = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            output = new PrintWriter(clientSocket.getOutputStream(), true);
+
         } catch (IOException e) {
             System.err.println("Server non in ascolto " + e);
             e.printStackTrace();
         }
 
     }
-
-    // public Socket attendi() {
-    // try {
-    // clientSocket = serverSocket.accept();
-    // input = new BufferedReader(new
-    // InputStreamReader(clientSocket.getInputStream()));
-    // output = new PrintWriter(clientSocket.getOutputStream(), true);
-    // System.out.println("Client Accettato");
-    // } catch (IOException e) {
-    // System.err.println(e);
-    // }
-    // return clientSocket;
-    // }
+    public Socket attendi() {
+        try {
+            clientSocket = serverSocket.accept();
+            System.out.println("Client Accettato");
+            input = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            output = new PrintWriter(clientSocket.getOutputStream(), true);
+        } catch (IOException e) {
+            System.err.println(e);
+        }
+        return clientSocket;
+    }
 
     public void scrivi(String messaggio) {
         output.println(messaggio);
